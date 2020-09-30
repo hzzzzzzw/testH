@@ -4,9 +4,9 @@
 <head>
     <meta charset="utf-8">
     <script src="js\jquery-3.1.1.min.js"></script>
-    <title>-∞'sFOnLine</title>
-    
-<script src="js\love.js"></script>
+    <title>ToCute'Y</title>
+
+    <script src="js\love.js"></script>
     <style>
         body {
             overflow: hidden;
@@ -36,12 +36,52 @@
 <body>
     <!-- <button onclick="starttime()">t</button> -->
     <h1 id="h1"></h1>
-    <audio id="mp3" src="music/demo1.m4a" autoplay="autoplay"></audio>
+
+    <!-- <audio id="mp3" src="music/m1.mp3" autoplay="autoplay"></audio> -->
+
+    <audio src="" id="mymusic"></audio>
+
+
     <!-- <iframe src="music/demo1.m4a" allow="autoplay" style="display:none" id="iframeAudio"></iframe> -->
     <canvas></canvas>
     <!--canvas 画布-->
 
     <script>
+
+        var music = document.getElementById("mymusic");
+        var musics = new Array();//音乐数组
+        function randomNum(minNum, maxNum) {
+            switch (arguments.length) {
+                case 1:
+                    return parseInt(Math.random() * minNum + 1, 10);
+                    break;
+                case 2:
+                    return parseInt(Math.random() * (maxNum - minNum + 1) + minNum, 10);
+                    break;
+                default:
+                    return 0;
+                    break;
+            }
+        }
+        function getMusic() {
+            var rd = randomNum(1,6);
+            console.log(rd);
+            music.src = "music/m" + rd+".mp3";//改变音乐的SRC
+            music.play();
+        }
+        music.onended = function () {
+            getMusic();
+        };
+
+        $(function () {
+            starttime();
+            // document.getElementById('mp3').play();
+            //$('#mp3').play();
+            getMusic();
+        });
+
+
+
         var canvas = document.querySelector("canvas"),
             ctx = canvas.getContext("2d");
 
@@ -127,14 +167,9 @@
                 }
             }
         }
-        $(function(){
-            starttime();
-            // document.getElementById('mp3').play();
-            $('#mp3').play();
-        });
 
-        function starttime(){
-            time(document.getElementById('h1'), '2018,11,25');     // 在一起的时间
+        function starttime() {
+            time(document.getElementById('h1'), '2020,6,1');     // 在一起的时间
             ptimer = setTimeout(starttime, 1000); // 添加计时器
         }
 
@@ -156,8 +191,10 @@
             var second = parseInt(time % 60);  // 以60秒为一整份 取余 剩下秒数
             //              console.log(hour+":"+minute+":"+second)
             //              alert(hour)
-            obj.innerHTML = "sb<br>已经：<br>" + day + "天" + hour + "小时" + minute + "分" + second + "秒" + "了呢<br><span>一时间不知道从哪说起,真爱来了，我们要好好把握。<br>不管面临多大的压力,不管前面的路如何崎岖.<br>不管经历过什么,我仍坚信最浪漫的事就是和你一起呆虛.<br>相信中间的计时器,将永远继续下去,直至数据溢出.</span>"
-
+            var str = "";
+            str+="Hey Y<br>已经：<br>" + day + "天" + hour + "小时" + minute + "分" + second + "秒" + "了呢<br><span>";
+            str+="<br>愿你以后的每一天都能开心快乐无忧无虑";
+            obj.innerHTML = str;
             return true;
         }
     </script>
